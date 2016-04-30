@@ -4,7 +4,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <import resource="dependencies/commandhandlers.xml"/>
+    <import resource="dependencies/repositories.xml"/>
+    <import resource="dependencies/eventstore.xml"/>
+    <import resource="dependencies/axon.xml"/>
+    <import resource="dependencies/readmodels.xml"/>
+
     <bean id="application" class="org.mauropalsgraaf.axon.Application">
+        <constructor-arg ref="commandGateway"/>
+    </bean>
+
+    <bean id="applicationReadModel" class="org.mauropalsgraaf.axon.ApplicationReadModel">
+        <constructor-arg ref="allPersonsReadModel"/>
     </bean>
 
 </beans>

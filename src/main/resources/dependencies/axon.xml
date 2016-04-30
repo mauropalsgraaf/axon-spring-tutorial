@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:axon="http://www.axonframework.org/schema/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd http://www.axonframework.org/schema/core http://www.axonframework.org/schema/axon-core.xsd">
+
+    <bean id="commandGateway" class="org.axonframework.commandhandling.gateway.CommandGatewayFactoryBean">
+        <property name="commandBus" ref="commandBus"/>
+    </bean>
+
+    <axon:command-bus id="commandBus"/>
+    <axon:event-bus id="eventBus"/>
+
+    <!--
+    If you use Spring, you can add the <axon:annotation-config/> element to your application context.
+    It will turn any bean with @CommandHandler annotated methods into a command handler.
+    They will also be automatically subscribed to the CommandBus. In combination with Spring's classpath scanning
+    (@Component), this will automatically subscribe any command handler in your application.
+    -->
+    <axon:annotation-config/>
+
+
+    <!-- this will make a handler possible as a command handler with annotations -->
+    <!--
+    <axon:aggregate-command-handler id="PersonHandler"
+                                    aggregate-type="org.mauropalsgraaf.axon.domainmodel.Person"
+                                    repository="personRepository"
+                                    command-bus="commandBus"/>
+    -->
+</beans>
